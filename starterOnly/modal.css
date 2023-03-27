@@ -1,3 +1,4 @@
+/* GENERAL */
 :root {
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
@@ -30,11 +31,13 @@ img {
   padding-right: 1rem;
 }
 
+/* HEADER */
+
 .topnav {
   overflow: hidden;
   margin: 3.5%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 .header-logo {
 
@@ -77,6 +80,9 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+  .topnav{
+    flex-direction: column;
+  }
   .topnav a {display: none;}
   .topnav a.icon {
     position: absolute;
@@ -112,6 +118,8 @@ img {
     margin-top: -15px;
   }
 } */
+
+/* MAIN */
 
 main {
   font-size: 130%;
