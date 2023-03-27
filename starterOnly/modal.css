@@ -39,10 +39,12 @@ img {
   display: flex;
   flex-wrap: wrap;
 }
-.header-logo {
 
-    /* float: left; */
-}
+/* .header-logo {
+
+    float: left;
+} */
+
 .main-navbar {
     float: right;
     margin-left: auto;
@@ -228,6 +230,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
@@ -246,12 +249,13 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
+
+/* input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
 } */
+
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -341,6 +345,7 @@ input[data-error]::after {
 .close:after {
   transform: rotate(-45deg);
 }
+
 .btn-submit,
 .btn-signup {
   background: #fe142f;

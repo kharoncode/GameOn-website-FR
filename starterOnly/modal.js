@@ -42,3 +42,15 @@ function closeModal() {
 }
 
 // Submit modal
+
+var firstName = "";
+modalFirstName.addEventListener("input", (e)=>{
+  firstName = e.target.value;
+  console.log(e);
+})
+
+let validity;
+modalbg.addEventListener("change", ()=>{
+  validity= modalFirstName.checkValidity();
+  console.log(validity);
+});
