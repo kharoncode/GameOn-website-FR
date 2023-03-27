@@ -33,12 +33,16 @@ img {
 .topnav {
   overflow: hidden;
   margin: 3.5%;
+  display: flex;
+  flex-direction: column;
 }
 .header-logo {
-    float: left;
+
+    /* float: left; */
 }
 .main-navbar {
     float: right;
+    margin-left: auto;
 }
 .topnav a {
   float: left;
@@ -75,18 +79,24 @@ img {
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
   .topnav a.icon {
-    float: right;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    margin: 2.5%;
     display: block;
+    /* float: right;*/
   }
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
+  /* .topnav.responsive {
+    position: relative;}
+ */
+  /* .topnav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
-  }
+  } */
   .topnav.responsive a {
     float: none;
     display: block;
@@ -94,16 +104,14 @@ img {
   }
 }
 
-
-
- @media screen and (max-width: 540px) {
+ /* @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
     margin-top: -15px;
   }
-} 
+} */
 
 main {
   font-size: 130%;
