@@ -13,7 +13,7 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const modalSubmit = document.querySelectorAll(".btn-submit");
+const modalSubmit = document.querySelector(".btn-submit");
 const modalClose = document.querySelectorAll(".close");
 // -- Form
 const modalFirstName = document.querySelector('input[id="first"]');
@@ -21,7 +21,7 @@ const modalLastName = document.querySelector('input[id="last"]');
 const modalMail = document.querySelector('input[id="email"]');
 const modalBirthdate = document.querySelector('input[id="birthdate"]');
 const modalNbrTournament = document.querySelector('input[id="quantity"]');
-/* const modalLocationTournament = document.querySelector('input[id="xxx"]'); */
+const modalLocationTournament = document.querySelectorAll('input[name="location"]');
 const modalCOU = document.querySelector('input[id="checkbox1"]');
 const modalNewsletter = document.querySelector('input[id="checkbox2"]');
 
@@ -31,6 +31,8 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  modalSubmit.disabled = true;
+  modalSubmit.style.background = "#7c4349";
 }
 
 // close modal event
@@ -49,14 +51,34 @@ function closeModal() {
 
 
 // Submit modal
-var firstName = "";
+// -- Checkbox-Radio
+modalbg.addEventListener("change", ()=>{
+  modalLocationTournament.forEach(e => {
+    if(e.checked === true) {
+      modalSubmit.disabled = false;
+      modalSubmit.style.background = "#fe142f";
+    }
+  });
+});
+
+/* modalSubmit.addEventListener("click", ()=>{
+  console.log("click");
+}); */
+
+// Test
+/* var firstName = "";
 modalFirstName.addEventListener("input", (e)=>{
   firstName = e.target.value;
-  console.log(e);
-})
+  if (firstName.length < 2){
+    console.log("Error");
+  }
+  else {
+    console.log("ok");
+  }
+});
 
 let validity;
-modalbg.addEventListener("change", ()=>{
+modalbg.addEventListener("submit", ()=>{
   validity= modalFirstName.checkValidity();
   console.log(validity);
-});
+}); */

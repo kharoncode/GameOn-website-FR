@@ -357,6 +357,7 @@ input {
   color: #fff;
   cursor: pointer;
   border: 0;
+  transition-duration: 0.3s;
 }
 /* custom select styles */
 .custom-select {
