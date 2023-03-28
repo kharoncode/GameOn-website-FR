@@ -4,4 +4,4 @@
 3. Il n'y a aucune dépendance ;
 4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
 
-Resultat ici => https://kharoncode.github.io/GameOn-website-FR/starterOnly/
+Resultat ici => [link](https://kharoncode.github.io/GameOn-website-FR/starterOnly/)
