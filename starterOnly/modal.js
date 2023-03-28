@@ -49,23 +49,57 @@ function closeModal() {
   }, modalContentDuration);
 }
 
+// Validity
+var firstNameValidity;
+modalFirstName.addEventListener("change", (e)=>{
+  firstNameValidity = e.target.validity.valid;
+});
 
-// Submit modal
-// -- Checkbox-Radio
+var lastNameValidity;
+modalLastName.addEventListener("change", (e)=>{
+  lastNameValidity = e.target.validity.valid;
+});
+
+var mailValidity;
+modalMail.addEventListener("change", (e)=>{
+  mailValidity = e.target.validity.valid;
+});
+
+var birthdateValidity;
+modalBirthdate.addEventListener("change", (e)=>{
+  birthdateValidity = e.target.validity.valid;
+});
+
+var nbrTournamentValidity;
+modalNbrTournament.addEventListener("change", (e)=>{
+  nbrTournamentValidity = e.target.validity.valid;
+});
+
+var locationTournamentValidity;
 modalbg.addEventListener("change", ()=>{
   modalLocationTournament.forEach(e => {
     if(e.checked === true) {
-      modalSubmit.disabled = false;
-      modalSubmit.style.background = "#fe142f";
+      locationTournamentValidity = true;
     }
   });
 });
 
-/* modalSubmit.addEventListener("click", ()=>{
-  console.log("click");
-}); */
+var couValidity;
+modalCOU.addEventListener("change", (e)=>{
+  couValidity = e.target.validity.valid;
+});
 
-// Test
+// Submit modal
+modalbg.addEventListener("change", ()=>{
+  if(firstNameValidity===true && lastNameValidity===true && mailValidity===true && birthdateValidity===true && nbrTournamentValidity===true && couValidity===true &&  locationTournamentValidity===true) {
+    modalSubmit.disabled = false;
+    modalSubmit.style.background = "#fe142f";
+  }else{
+    modalSubmit.disabled = true;
+    modalSubmit.style.background = "#7c4349";
+  }
+});
+
 /* var firstName = "";
 modalFirstName.addEventListener("input", (e)=>{
   firstName = e.target.value;
@@ -75,10 +109,4 @@ modalFirstName.addEventListener("input", (e)=>{
   else {
     console.log("ok");
   }
-});
-
-let validity;
-modalbg.addEventListener("submit", ()=>{
-  validity= modalFirstName.checkValidity();
-  console.log(validity);
 }); */
