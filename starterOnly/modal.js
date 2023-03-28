@@ -38,7 +38,7 @@ modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
 
 // close modal form
 var modalContent = document.querySelector(".content");
-var modalContentDuration = getComputedStyle(modalContent).getPropertyValue("animation-duration").match(/\d+/g)[1]*100;
+var modalContentDuration = getComputedStyle(modalContent).getPropertyValue("animation-duration").match(/\d+.\d+|\d+/)*1000;
 function closeModal() {
   modalContent.style.animation = "modalclose var(--modal-duration) both";
   setTimeout(() => { 
@@ -48,9 +48,7 @@ function closeModal() {
 }
 
 
-
 // Submit modal
-
 var firstName = "";
 modalFirstName.addEventListener("input", (e)=>{
   firstName = e.target.value;
