@@ -21,7 +21,7 @@ const modalLastName = document.querySelector('input[id="last"]');
 const modalMail = document.querySelector('input[id="email"]');
 const modalBirthdate = document.querySelector('input[id="birthdate"]');
 const modalNbrTournament = document.querySelector('input[id="quantity"]');
-/* const modalLocationTournament = document.querySelector('input[id="first"]'); */
+/* const modalLocationTournament = document.querySelector('input[id="xxx"]'); */
 const modalCOU = document.querySelector('input[id="checkbox1"]');
 const modalNewsletter = document.querySelector('input[id="checkbox2"]');
 
@@ -37,9 +37,17 @@ function launchModal() {
 modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
 
 // close modal form
+var modalContent = document.querySelector(".content");
+var modalContentDuration = getComputedStyle(modalContent).getPropertyValue("animation-duration").match(/\d+/g)[1]*100;
 function closeModal() {
-  modalbg.style.display ="none";
+  modalContent.style.animation = "modalclose var(--modal-duration) both";
+  setTimeout(() => { 
+    modalbg.style.display ="none";
+    modalContent.style.animation = "modalopen var(--modal-duration)";
+  }, modalContentDuration);
 }
+
+
 
 // Submit modal
 
