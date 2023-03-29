@@ -53,51 +53,117 @@ function closeModal() {
   }, modalContentDuration);
 }
 
-//TEST
-function validity(valide){
-  if (valide!==true){
-    console.log("true")
+// Link formData to a Name
+  // --Get all input link to formData
+  var formDataInput = document.querySelectorAll(".formData input");
+  var inputName = [];
+  function input (){
+    formDataInput.forEach(e => {
+      inputName.push(e.name);
+    });
+    inputName = [...new Set(inputName)]; // del double
+    inputName.pop(); // del the last one = newsletter
   }
-}
+  input();
 
-var test = document.querySelectorAll(".formData");
-var testbis = test(input["name='firstName'"]);
+  // --Add an Object "formDataObject" : key=name value=formData
+  var formDataObject = new Object();
+  function formDataName(inputName, formData){
+    for (let i = 0; i<inputName.length; i++){
+      formDataObject[`${inputName[i]}`]=formData[i];
+    };
+  }
+  formDataName(inputName, formData);
 
 // Error Messages
-const errorMessages = {
-  firstName : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
-  lastName : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
-  mail : "Veuillez entrer une adresse mail valide.",
+const errorMessagesObject = {
+  first : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
+  last : "bob Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  email : "Veuillez entrer une adresse mail valide.",
   birthdate : "Veuillez entrer une date de naissance valide.",
   quantity : "Vous devez indiquez un nombre entre 1 et 99",
   local : "Vous devez choisir une option.",
   cou : "Vous devez vérifier que vous acceptez les termes et conditions."
 }
 
+const errorMessagesArray = [
+  "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
+  "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  "Veuillez entrer une adresse mail valide.",
+  "Veuillez entrer une date de naissance valide.",
+  "Vous devez indiquez un nombre entre 1 et 99",
+  "Vous devez choisir une option.",
+  "Vous devez vérifier que vous acceptez les termes et conditions."
+]
+
+/* var test;
+function addErrorMessage (name){
+  formDataObject[`${name}`].dataset.error = errorMessages[`${name}`];
+}
+
+function startAdd (){
+  for (let i = 0; i < errorMessages.length; i++) {
+   addErrorMessage(Object.keys(errorMessages)[i]);
+  }
+} */
+
+function startAdd (){
+  for (let i = 0; i < errorMessagesArray.length; i++) {
+   formData[i].dataset.error = errorMessagesArray[i];
+  }
+};
+startAdd();
+
 // Validity for each formData
 var firstNameValidity = modalFirstName.validity.valid;
-modalFirstName.addEventListener("change", (e)=>{
+modalFirstName.addEventListener("keyup", (e)=>{
   firstNameValidity = e.target.validity.valid;
+  /* formDataObject.first.dataset.error = errorMessages.first; */
+  if(firstNameValidity !== true){
+    formDataObject.first.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.first.dataset.errorVisible;
+  }
 });
 
 var lastNameValidity = modalLastName.validity.valid;
-modalLastName.addEventListener("change", (e)=>{
+modalLastName.addEventListener("keyup", (e)=>{
   lastNameValidity = e.target.validity.valid;
+  if(lastNameValidity !== true){
+    formDataObject.last.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.last.dataset.errorVisible;
+  }
 });
 
 var mailValidity = modalMail.validity.valid;
-modalMail.addEventListener("change", (e)=>{
+modalMail.addEventListener("keyup", (e)=>{
   mailValidity = e.target.validity.valid;
+  if(mailValidity !== true){
+    formDataObject.email.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.email.dataset.errorVisible;
+  }
 });
 
 var birthdateValidity = modalBirthdate.validity.valid;
 modalBirthdate.addEventListener("change", (e)=>{
   birthdateValidity = e.target.validity.valid;
+  if(birthdateValidity !== true){
+    formDataObject.birthdate.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.birthdate.dataset.errorVisible;
+  }
 });
 
 var quantityValidity = modalQuantity.validity.valid;
-modalQuantity.addEventListener("change", (e)=>{
+modalQuantity.addEventListener("keyup", (e)=>{
   quantityValidity = e.target.validity.valid;
+  if(quantityValidity !== true){
+    formDataObject.quantity.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.quantity.dataset.errorVisible;
+  }
 });
 
 var locationTournamentValidity;
@@ -110,11 +176,21 @@ function modalLocationTournamentValidity (){
 }
 document.querySelector('.locationTournament').addEventListener("change", (e)=>{
   modalLocationTournamentValidity();
+  if(locationTournamentValidity !== true){
+    formDataObject.location.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.location.dataset.errorVisible;
+  }
 });
 
 var couValidity = modalCOU.validity.valid;
 modalCOU.addEventListener("change", (e)=>{
   couValidity = e.target.validity.valid;
+  if(couValidity !== true){
+    formDataObject.cou.dataset.errorVisible = true;
+  }else{
+    delete formDataObject.cou.dataset.errorVisible;
+  }
 });
 
 // Submit modal
