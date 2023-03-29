@@ -20,7 +20,7 @@ const modalFirstName = document.querySelector('input[id="first"]');
 const modalLastName = document.querySelector('input[id="last"]');
 const modalMail = document.querySelector('input[id="email"]');
 const modalBirthdate = document.querySelector('input[id="birthdate"]');
-const modalNbrTournament = document.querySelector('input[id="quantity"]');
+const modalQuantity = document.querySelector('input[id="quantity"]');
 const modalLocationTournament = document.querySelectorAll('input[name="location"]');
 const modalCOU = document.querySelector('input[id="checkbox1"]');
 const modalNewsletter = document.querySelector('input[id="checkbox2"]');
@@ -36,6 +36,7 @@ function launchModal() {
   }else{
     modalSubmit.style.background = "#7c4349";
   }
+  modalLocationTournamentValidity ();
 }
 
 // close modal event
@@ -52,7 +53,28 @@ function closeModal() {
   }, modalContentDuration);
 }
 
-// Validity
+//TEST
+function validity(valide){
+  if (valide!==true){
+    console.log("true")
+  }
+}
+
+var test = document.querySelectorAll(".formData");
+var testbis = test(input["name='firstName'"]);
+
+// Error Messages
+const errorMessages = {
+  firstName : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
+  lastName : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  mail : "Veuillez entrer une adresse mail valide.",
+  birthdate : "Veuillez entrer une date de naissance valide.",
+  quantity : "Vous devez indiquez un nombre entre 1 et 99",
+  local : "Vous devez choisir une option.",
+  cou : "Vous devez vérifier que vous acceptez les termes et conditions."
+}
+
+// Validity for each formData
 var firstNameValidity = modalFirstName.validity.valid;
 modalFirstName.addEventListener("change", (e)=>{
   firstNameValidity = e.target.validity.valid;
@@ -73,18 +95,21 @@ modalBirthdate.addEventListener("change", (e)=>{
   birthdateValidity = e.target.validity.valid;
 });
 
-var nbrTournamentValidity = modalNbrTournament.validity.valid;
-modalNbrTournament.addEventListener("change", (e)=>{
-  nbrTournamentValidity = e.target.validity.valid;
+var quantityValidity = modalQuantity.validity.valid;
+modalQuantity.addEventListener("change", (e)=>{
+  quantityValidity = e.target.validity.valid;
 });
 
 var locationTournamentValidity;
-document.querySelector(".locationTournament").addEventListener("change", ()=>{
-  modalLocationTournament.forEach(e => {
-    if(e.checked === true) {
+function modalLocationTournamentValidity (){
+  modalLocationTournament.forEach(button => {
+    if (button.validity.valid === true){
       locationTournamentValidity = true;
     }
-  });
+  })
+}
+document.querySelector('.locationTournament').addEventListener("change", (e)=>{
+  modalLocationTournamentValidity();
 });
 
 var couValidity = modalCOU.validity.valid;
@@ -101,4 +126,6 @@ modalbg.addEventListener("change", ()=>{
   }
 });
 
-/* document.getElementById("myform").reportValidity() */
+// TODO
+// Use onsubmit : evenement lors du submit
+// Use setCustomValidity(errorMessage) : custom error message
