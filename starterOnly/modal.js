@@ -31,8 +31,13 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  modalSubmit.disabled = true;
-  modalSubmit.style.background = "#7c4349";
+  if(firstNameValidity===true && lastNameValidity===true && mailValidity===true && birthdateValidity===true && nbrTournamentValidity===true && couValidity===true &&  locationTournamentValidity===true) {
+    modalSubmit.disabled = false;
+    modalSubmit.style.background = "#fe142f";
+  }else{
+    modalSubmit.disabled = true;
+    modalSubmit.style.background = "#7c4349";
+  }
 }
 
 // close modal event
@@ -50,33 +55,33 @@ function closeModal() {
 }
 
 // Validity
-var firstNameValidity;
+var firstNameValidity = modalFirstName.validity.valid;
 modalFirstName.addEventListener("change", (e)=>{
   firstNameValidity = e.target.validity.valid;
 });
 
-var lastNameValidity;
+var lastNameValidity = modalLastName.validity.valid;
 modalLastName.addEventListener("change", (e)=>{
   lastNameValidity = e.target.validity.valid;
 });
 
-var mailValidity;
+var mailValidity = modalMail.validity.valid;
 modalMail.addEventListener("change", (e)=>{
   mailValidity = e.target.validity.valid;
 });
 
-var birthdateValidity;
+var birthdateValidity = modalBirthdate.validity.valid;
 modalBirthdate.addEventListener("change", (e)=>{
   birthdateValidity = e.target.validity.valid;
 });
 
-var nbrTournamentValidity;
+var nbrTournamentValidity = modalNbrTournament.validity.valid;
 modalNbrTournament.addEventListener("change", (e)=>{
   nbrTournamentValidity = e.target.validity.valid;
 });
 
 var locationTournamentValidity;
-modalbg.addEventListener("change", ()=>{
+document.querySelector(".locationTournament").addEventListener("change", ()=>{
   modalLocationTournament.forEach(e => {
     if(e.checked === true) {
       locationTournamentValidity = true;
@@ -84,7 +89,7 @@ modalbg.addEventListener("change", ()=>{
   });
 });
 
-var couValidity;
+var couValidity = modalCOU.validity.valid;
 modalCOU.addEventListener("change", (e)=>{
   couValidity = e.target.validity.valid;
 });
