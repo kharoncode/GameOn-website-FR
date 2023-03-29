@@ -31,11 +31,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  if(firstNameValidity===true && lastNameValidity===true && mailValidity===true && birthdateValidity===true && nbrTournamentValidity===true && couValidity===true &&  locationTournamentValidity===true) {
-    modalSubmit.disabled = false;
+  if(document.getElementById("myForm").reportValidity() === true) {
     modalSubmit.style.background = "#fe142f";
   }else{
-    modalSubmit.disabled = true;
     modalSubmit.style.background = "#7c4349";
   }
 }
@@ -96,22 +94,11 @@ modalCOU.addEventListener("change", (e)=>{
 
 // Submit modal
 modalbg.addEventListener("change", ()=>{
-  if(firstNameValidity===true && lastNameValidity===true && mailValidity===true && birthdateValidity===true && nbrTournamentValidity===true && couValidity===true &&  locationTournamentValidity===true) {
-    modalSubmit.disabled = false;
+  if(document.getElementById("myForm").reportValidity() === true) {
     modalSubmit.style.background = "#fe142f";
   }else{
-    modalSubmit.disabled = true;
     modalSubmit.style.background = "#7c4349";
   }
 });
 
-/* var firstName = "";
-modalFirstName.addEventListener("input", (e)=>{
-  firstName = e.target.value;
-  if (firstName.length < 2){
-    console.log("Error");
-  }
-  else {
-    console.log("ok");
-  }
-}); */
+/* document.getElementById("myform").reportValidity() */
