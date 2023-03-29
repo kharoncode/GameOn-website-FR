@@ -174,7 +174,7 @@ function modalLocationTournamentValidity (){
     }
   })
 }
-document.querySelector('.locationTournament').addEventListener("change", (e)=>{
+document.querySelector('.content').addEventListener("change", (e)=>{
   modalLocationTournamentValidity();
   if(locationTournamentValidity !== true){
     formDataObject.location.dataset.errorVisible = true;
