@@ -30,6 +30,10 @@ img {
   padding-right: 1rem;
 }
 
+.hidden{
+  display: none;
+}
+
 /* HEADER */
 
 .topnav {
@@ -190,6 +194,21 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+.afterSubmit{
+  width: 100%;
+  height: 800px;
+  font-size: 1.5em;
+  display: none;
+  justify-content: center;
+  align-items:  center;
+  text-align: center;
+}
+
+.btn-signup--after{
+  position: absolute;
+  bottom: 18px;
+}
+
 .content {
   margin: 5% auto;
   width: 100%;
@@ -233,7 +252,7 @@ input {
 
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.5em;
   color: #e54858;
   display: block;
   margin-top: 7px;

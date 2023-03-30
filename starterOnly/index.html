@@ -62,13 +62,19 @@
         <div class="content">
           <span class="close"></span>
           <div class="modal-body">
+            <div class="afterSubmit">Merci pour </br> votre inscription
+              <button class="btn-signup btn-signup--after">
+                Fermer
+              </button>
+            </div>
             <form
+              class=""
               id="myForm"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
-            >
+              onsubmit="return validate(event);"
+            > 
               <div
                 class="formData" data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom.">
                 <label for="first">Prénom</label><br>
@@ -129,9 +135,9 @@
                 />
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
-              <div class="formData locationTournament" data-error="Vous devez choisir une option.">
+              <div class="formData" data-error="Vous devez choisir une option.">
                 <input
-                required
+                  required
                   class="checkbox-input"
                   type="radio"
                   id="location1"
@@ -214,7 +220,11 @@
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" name="newsletter" />
+                <input 
+                class="checkbox-input" 
+                type="checkbox" 
+                id="checkbox2" 
+                name="newsletter" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.

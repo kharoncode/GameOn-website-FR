@@ -21,7 +21,7 @@ const modalLastName = document.querySelector('input[id="last"]');
 const modalMail = document.querySelector('input[id="email"]');
 const modalBirthdate = document.querySelector('input[id="birthdate"]');
 const modalQuantity = document.querySelector('input[id="quantity"]');
-const modalLocationTournament = document.querySelectorAll('input[name="location"]');
+const modalLocation = document.querySelectorAll('input[name="location"]');
 const modalCOU = document.querySelector('input[id="checkbox1"]');
 const modalNewsletter = document.querySelector('input[id="checkbox2"]');
 
@@ -36,11 +36,11 @@ function launchModal() {
   }else{
     modalSubmit.style.background = "#7c4349";
   }
-  modalLocationTournamentValidity ();
 }
 
 // close modal event
 modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
+document.querySelector(".btn-signup--after").addEventListener("click", closeModal);
 
 // close modal form
 var modalContent = document.querySelector(".content");
@@ -62,7 +62,6 @@ function closeModal() {
       inputName.push(e.name);
     });
     inputName = [...new Set(inputName)]; // del double
-    inputName.pop(); // del the last one = newsletter
   }
   input();
 
@@ -78,84 +77,59 @@ function closeModal() {
 // Error Messages
 const errorMessagesObject = {
   first : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
-  last : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  last : "bob Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   email : "Veuillez entrer une adresse mail valide.",
   birthdate : "Veuillez entrer une date de naissance valide.",
-  quantity : "Vous devez indiquez un nombre entre 1 et 99",
-  location : "Vous devez choisir une option.",
-  cou : "Vous devez vérifier que vous acceptez les termes et conditions."
+  quantity : "Vous devez indiquer un nombre entre 1 et 99",
+  location : "Vous devez choisir une des options.",
+  cou : "Vous devez vérifier que vous acceptez les termes et conditions.",
 }
 
 for (const key in errorMessagesObject) {
     const element = errorMessagesObject[key];
     formDataObject[key].dataset.error = element;
-    console.log("Log du errorMsgKey : "+key)
-    console.log("Log du errorMsgEl : "+element)
 }
 
 // Validity for each formData
-var firstNameValidity = modalFirstName.validity.valid;
+function formDataValidity (key, modal){
+  if(modal.target.validity.valid){
+    delete formDataObject[key].dataset.errorVisible;
+  }else{
+    formDataObject[key].dataset.errorVisible = true;
+  }
+}
+
 modalFirstName.addEventListener("keyup", (e)=>{
-  firstNameValidity = e.target.validity.valid;
-  /* formDataObject.first.dataset.error = errorMessages.first; */
-  if(firstNameValidity !== true){
-    formDataObject.first.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.first.dataset.errorVisible;
-  }
-});
+  formDataValidity("first", e);
+}); 
 
-var lastNameValidity = modalLastName.validity.valid;
 modalLastName.addEventListener("keyup", (e)=>{
-  lastNameValidity = e.target.validity.valid;
-  if(lastNameValidity !== true){
-    formDataObject.last.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.last.dataset.errorVisible;
-  }
+  formDataValidity("last", e);
 });
 
-var mailValidity = modalMail.validity.valid;
 modalMail.addEventListener("keyup", (e)=>{
-  mailValidity = e.target.validity.valid;
-  if(mailValidity !== true){
-    formDataObject.email.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.email.dataset.errorVisible;
-  }
+  formDataValidity("email", e);
 });
 
-var birthdateValidity = modalBirthdate.validity.valid;
 modalBirthdate.addEventListener("change", (e)=>{
-  birthdateValidity = e.target.validity.valid;
-  if(birthdateValidity !== true){
-    formDataObject.birthdate.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.birthdate.dataset.errorVisible;
-  }
+  formDataValidity("birthdate", e);
 });
 
-var quantityValidity = modalQuantity.validity.valid;
 modalQuantity.addEventListener("keyup", (e)=>{
-  quantityValidity = e.target.validity.valid;
-  if(quantityValidity !== true){
-    formDataObject.quantity.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.quantity.dataset.errorVisible;
-  }
+  formDataValidity("quantity", e);
 });
 
-var locationTournamentValidity;
-function modalLocationTournamentValidity (){
-  modalLocationTournament.forEach(button => {
+var locationValidity;
+function modalLocationValidity (){
+  modalLocation.forEach(button => {
     if (button.validity.valid === true){
-      locationTournamentValidity = true;
+      locationValidity = true;
     }
   })
 }
-document.querySelector('.content').addEventListener("change", (e)=>{
-  modalLocationTournamentValidity();
-  if(locationTournamentValidity !== true){
+document.querySelector('.content').addEventListener("change", ()=>{
+  modalLocationValidity();
+  if(locationValidity !== true){
     formDataObject.location.dataset.errorVisible = true;
   }else{
     delete formDataObject.location.dataset.errorVisible;
@@ -164,22 +138,25 @@ document.querySelector('.content').addEventListener("change", (e)=>{
 
 var couValidity = modalCOU.validity.valid;
 modalCOU.addEventListener("change", (e)=>{
-  couValidity = e.target.validity.valid;
-  if(couValidity !== true){
-    formDataObject.cou.dataset.errorVisible = true;
-  }else{
-    delete formDataObject.cou.dataset.errorVisible;
-  }
+  formDataValidity("cou", e);
 });
 
 // Submit modal
-modalbg.addEventListener("change", ()=>{
-  if(document.getElementById("myForm").reportValidity() === true) {
+// -- Validity Test
+modalSubmit.addEventListener("mouseover", ()=>{
+  if(document.getElementById("myForm").reportValidity()) {
     modalSubmit.style.background = "#fe142f";
   }else{
     modalSubmit.style.background = "#7c4349";
   }
 });
+
+// -- Onsubmit
+function validate(event){
+  event.preventDefault()
+  document.getElementById("myForm").classList.add('hidden');
+  document.querySelector(".afterSubmit").style.display = "flex";
+}
 
 // TODO
 // Use onsubmit : evenement lors du submit
