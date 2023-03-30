@@ -15,6 +15,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalSubmit = document.querySelector(".btn-submit");
 const modalClose = document.querySelectorAll(".close");
+const modalForm = document.getElementById("myForm");
 // -- Form
 const modalFirstName = document.querySelector('input[id="first"]');
 const modalLastName = document.querySelector('input[id="last"]');
@@ -31,7 +32,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  if(document.getElementById("myForm").reportValidity() === true) {
+  if(modalForm.reportValidity() === true) {
     modalSubmit.style.background = "#fe142f";
   }else{
     modalSubmit.style.background = "#7c4349";
@@ -40,7 +41,7 @@ function launchModal() {
 
 // close modal event
 modalClose.forEach((btn) => btn.addEventListener("click", closeModal));
-document.querySelector(".btn-signup--after").addEventListener("click", closeModal);
+document.querySelector(".confirmation-btn").addEventListener("click", closeModal);
 
 // close modal form
 var modalContent = document.querySelector(".content");
@@ -77,7 +78,7 @@ function closeModal() {
 // Error Messages
 const errorMessagesObject = {
   first : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
-  last : "bob Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  last : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   email : "Veuillez entrer une adresse mail valide 'Ex: jean@doe.com'.",
   birthdate : "Veuillez entrer une date de naissance valide.",
   quantity : "Vous devez indiquer un nombre entre 1 et 99",
@@ -91,7 +92,7 @@ for (const key in errorMessagesObject) {
 }
 
 // Input Pattern 
-formDataObject.email.dataset.pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+formDataObject.email.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}");
 
 // Validity for each formData
 function formDataValidity (key, modal){
@@ -147,7 +148,7 @@ modalCOU.addEventListener("change", (e)=>{
 // Submit modal
 // -- Validity Test
 modalSubmit.addEventListener("mouseover", ()=>{
-  if(document.getElementById("myForm").reportValidity()) {
+  if(modalForm.reportValidity()) {
     modalSubmit.style.background = "#fe142f";
   }else{
     modalSubmit.style.background = "#7c4349";
@@ -157,10 +158,10 @@ modalSubmit.addEventListener("mouseover", ()=>{
 // -- Onsubmit
 function validate(event){
   event.preventDefault()
-  document.getElementById("myForm").classList.add('hidden');
-  document.querySelector(".afterSubmit").style.display = "flex";
+  modalForm.style.animation = "formhidden var(--modal-duration) both";
+  setTimeout(() => { 
+    modalForm.classList.add('select-hide');
+    document.querySelector(".confirmation-container").style.display = "flex";
+    document.querySelector(".confirmation-container").style.animation = "confirmationanim var(--modal-duration) both";
+    }, modalContentDuration);
 }
-
-// TODO
-// Use onsubmit : evenement lors du submit
-// Use setCustomValidity(errorMessage) : custom error message
