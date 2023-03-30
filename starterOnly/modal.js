@@ -78,41 +78,20 @@ function closeModal() {
 // Error Messages
 const errorMessagesObject = {
   first : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
-  last : "bob Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  last : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   email : "Veuillez entrer une adresse mail valide.",
   birthdate : "Veuillez entrer une date de naissance valide.",
   quantity : "Vous devez indiquez un nombre entre 1 et 99",
-  local : "Vous devez choisir une option.",
+  location : "Vous devez choisir une option.",
   cou : "Vous devez vérifier que vous acceptez les termes et conditions."
 }
 
-const errorMessagesArray = [
-  "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
-  "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
-  "Veuillez entrer une adresse mail valide.",
-  "Veuillez entrer une date de naissance valide.",
-  "Vous devez indiquez un nombre entre 1 et 99",
-  "Vous devez choisir une option.",
-  "Vous devez vérifier que vous acceptez les termes et conditions."
-]
-
-/* var test;
-function addErrorMessage (name){
-  formDataObject[`${name}`].dataset.error = errorMessages[`${name}`];
+for (const key in errorMessagesObject) {
+    const element = errorMessagesObject[key];
+    formDataObject[key].dataset.error = element;
+    console.log("Log du errorMsgKey : "+key)
+    console.log("Log du errorMsgEl : "+element)
 }
-
-function startAdd (){
-  for (let i = 0; i < errorMessages.length; i++) {
-   addErrorMessage(Object.keys(errorMessages)[i]);
-  }
-} */
-
-function startAdd (){
-  for (let i = 0; i < errorMessagesArray.length; i++) {
-   formData[i].dataset.error = errorMessagesArray[i];
-  }
-};
-startAdd();
 
 // Validity for each formData
 var firstNameValidity = modalFirstName.validity.valid;
