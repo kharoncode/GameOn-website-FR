@@ -78,7 +78,7 @@ function closeModal() {
 const errorMessagesObject = {
   first : "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
   last : "bob Veuillez entrer 2 caractères ou plus pour le champ du nom.",
-  email : "Veuillez entrer une adresse mail valide.",
+  email : "Veuillez entrer une adresse mail valide 'Ex: jean@doe.com'.",
   birthdate : "Veuillez entrer une date de naissance valide.",
   quantity : "Vous devez indiquer un nombre entre 1 et 99",
   location : "Vous devez choisir une des options.",
@@ -89,6 +89,9 @@ for (const key in errorMessagesObject) {
     const element = errorMessagesObject[key];
     formDataObject[key].dataset.error = element;
 }
+
+// Input Pattern 
+formDataObject.email.dataset.pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
 
 // Validity for each formData
 function formDataValidity (key, modal){
