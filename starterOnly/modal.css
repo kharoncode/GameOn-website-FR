@@ -80,6 +80,11 @@ img {
   font-size: 1.5em;
 }
 
+.topnav img{
+  width: auto;
+  height: auto;
+}
+
 @media screen and (max-width: 768px) {
   .topnav{
     flex-direction: column;
