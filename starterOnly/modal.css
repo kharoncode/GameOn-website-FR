@@ -85,7 +85,7 @@ img {
   height: auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
   .topnav{
     flex-direction: column;
   }
@@ -100,7 +100,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
   /* .topnav.responsive {
     position: relative;}
  */
@@ -526,7 +526,7 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 950px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -535,6 +535,7 @@ footer {
     background: #fff;
     color: #000;
     padding: 20px;
+    text-align: center;
   }
   .hero-content::after {
     content: unset;

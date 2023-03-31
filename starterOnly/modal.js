@@ -67,13 +67,17 @@
   // --Get all input name
     var formDataInput = document.querySelectorAll(".formData input");
     var inputName = [];
-    function inputNameAdd (){
+    for(const key of formDataInput){
+      inputName.push(key.name)
+    }
+    inputName = [...new Set(inputName)]; // del duplicate
+    /* function inputNameAdd (){
       formDataInput.forEach(e => {
         inputName.push(e.name);
       });
       inputName = [...new Set(inputName)]; // del duplicate
     }
-    inputNameAdd();
+    inputNameAdd(); */
   // --Add an Object "formDataObject" : key=inputName value=formData
     var formDataObject = new Object();
     for (let i = 0; i<inputName.length; i++){
