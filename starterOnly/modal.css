@@ -98,6 +98,12 @@ img {
     display: block;
     /* float: right;*/
   }
+
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -109,11 +115,7 @@ img {
     right: 0;
     top: 0;
   } */
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
+  
 }
 
  /* @media screen and (max-width: 540px) {
@@ -467,7 +469,7 @@ input {
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  /* min-width: 424px; */
 }
 .hero-content::after {
   content: "";
@@ -535,7 +537,6 @@ footer {
     background: #fff;
     color: #000;
     padding: 20px;
-    text-align: center;
   }
   .hero-content::after {
     content: unset;
@@ -563,6 +564,15 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 707px){
+  .hero-headline{
+    font-size: 2.4em;
+  }
+  .formData[data-error]::after {
+    font-size: 0.38em;
   }
 }
 
