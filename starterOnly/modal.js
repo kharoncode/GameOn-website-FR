@@ -141,14 +141,13 @@ function submitColorValidity(){
     });
   // --Location
     const modalInputLocation = document.getElementById('location1');
-    modalSubmit.addEventListener("mouseover", ()=>{
+    document.getElementById("location").addEventListener("mouseover", ()=>{
       if(modalInputLocation.validity.valid){
         delete formDataObject['location'].dataset.errorVisible;
       }else{
         formDataObject['location'].dataset.errorVisible = true;
       };
     });
-
   // --Conditions of Sale
     var cosValidity = modalCOS.validity.valid;
     modalCOS.addEventListener("change", (e)=>{

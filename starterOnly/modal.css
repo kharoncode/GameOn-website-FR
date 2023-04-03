@@ -317,7 +317,11 @@ input {
   opacity: 0;
 }
 .checkbox-input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  top: -14px;
+  left: -14px;
+  /* display: none; */
 }
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
