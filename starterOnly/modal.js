@@ -26,12 +26,14 @@
     const modalCOS = document.querySelector('input[id="checkbox1"]');
     const modalNewsletter = document.querySelector('input[id="checkbox2"]');
 
-// btn-submit color change if formvalidity=true/false
+// btn-submit background change if modalForm.reportValidity=true/false
 function submitColorValidity(){
   if(modalForm.reportValidity()) {
     modalSubmit.style.background = "#fe142f";
+    modalSubmit.style.cursor= "pointer"
   }else{
     modalSubmit.style.background = "#7c4349";
+    modalSubmit.style.cursor= "not-allowed";
   }
 } 
 
@@ -67,7 +69,7 @@ function submitColorValidity(){
         }, modalContentDuration);
       }
 
-// Link formData to a Name in an Object
+// Link each formData to a Name in an Object
   // --Get all input name
     var formDataInput = document.querySelectorAll(".formData input");
     var inputName = [];
@@ -112,13 +114,14 @@ function submitColorValidity(){
     modalBirthdate.setAttribute('min', "1907-03-04"); // Birthdade of the oldest woman on earth
 
 // Show ErrorMessage for each formData
-  function formDataValidity (key, modal){
-    if(modal.target.validity.valid){
-      delete formDataObject[key].dataset.errorVisible;
-    }else{
-      formDataObject[key].dataset.errorVisible = true;
+  // --for each formData add/remove errorMessage if formData.validity = false/true
+    function formDataValidity (key, modal){
+      if(modal.target.validity.valid){
+        delete formDataObject[key].dataset.errorVisible;
+      }else{
+        formDataObject[key].dataset.errorVisible = true;
+      }
     }
-  }
   // --First Name
     modalFirstName.addEventListener("keyup", (e)=>{
       formDataValidity("first", e);
@@ -140,7 +143,7 @@ function submitColorValidity(){
       formDataValidity("quantity", e);
     });
   // --Location
-    const modalInputLocation = document.getElementById('location1');
+    const modalInputLocation = modalLocation[0]; // if one input[type:radio].validity=true, the other=true too
     document.getElementById("location").addEventListener("mouseover", ()=>{
       if(modalInputLocation.validity.valid){
         delete formDataObject['location'].dataset.errorVisible;
@@ -148,14 +151,14 @@ function submitColorValidity(){
         formDataObject['location'].dataset.errorVisible = true;
       };
     });
-  // --Conditions of Sale
+  // --Conditions of Sale (cos)
     var cosValidity = modalCOS.validity.valid;
     modalCOS.addEventListener("change", (e)=>{
       formDataValidity("cos", e);
     });
 
 // Submit modal
-  // -- Validity Test : Submit color change if formvalidity=true/false
+  // -- First Validity Test:
     modalSubmit.addEventListener("mouseover", ()=>{
       submitColorValidity();
     });

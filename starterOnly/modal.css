@@ -199,7 +199,7 @@ main {
 
 .confirmation-container{
   width: 100%;
-  height: 800px;
+  min-height: 770px;
   font-size: 1.5em;
   opacity: 0;
   display: none;
@@ -215,6 +215,7 @@ main {
 
 .content {
   margin: 5% auto;
+  min-height: 877px;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -319,7 +320,6 @@ input {
 .checkbox-input {
   position: absolute;
   opacity: 0;
-  top: -14px;
   left: -14px;
   /* display: none; */
 }
