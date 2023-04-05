@@ -67,7 +67,7 @@ function submitColorValidity(){
           modalbg.style.display ="none";
           modalContent.style.animation = "modalopen var(--modal-duration)"; // reset animation
         }, modalContentDuration);
-      }
+      };
 
 // Link each formData to a Name in an Object
   // --Get all input name
@@ -75,7 +75,7 @@ function submitColorValidity(){
     var inputName = [];
     for(const key of formDataInput){
       inputName.push(key.name)
-    }
+    };
     inputName = [...new Set(inputName)]; // del duplicate
   // --Add an Object "formDataObject" : key=inputName value=formData
     var formDataObject = new Object();
@@ -89,7 +89,7 @@ function submitColorValidity(){
     last : "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
     email : "Veuillez entrer une adresse mail valide. Ex: game@on.com",
     birthdate : "Veuillez entrer une date de naissance valide.",
-    quantity : "Indiquez un nombre entre 1 et 99",
+    quantity : "Indiquez un nombre entre 0 et 99",
     location : "Choisissez une des options.",
     cos : "Vérifiez que vous acceptez les conditions d'utilisation.",
   }
@@ -100,6 +100,8 @@ function submitColorValidity(){
   }
 
 // Custom Validity 
+  // --FirstName
+  /*   modalFirstName.setAttribute('pattern', "!^\\s+|\\w+"); */
   // --Mail
     modalMail.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");
   // --Birthdate
@@ -162,13 +164,29 @@ function submitColorValidity(){
     modalSubmit.addEventListener("mouseover", ()=>{
       submitColorValidity();
     });
+    modalFirstName.addEventListener("submit", ()=>{
+      console.log("submit");
+      modalFirstName.value=modalFirstName.value.trim();
+    });
   // -- Onsubmit
     function validate(event){
-      event.preventDefault() // stop default event of onsubmit
-      modalForm.style.animation = "formhidden var(--modal-duration) both";
-      setTimeout(() => { 
-        modalForm.classList.add('select-hide'); // display=none;
-        document.querySelector(".confirmation-container").style.display = "flex";
-        document.querySelector(".confirmation-container").style.animation = "confirmationanim var(--modal-duration) both";
-        }, modalContentDuration);
+      console.log("modalFirst before trim : " + modalFirstName.value);
+      modalFirstName.value=modalFirstName.value.trim();
+      console.log("modalFirst after trim : " + modalFirstName.value);
+      console.log("modalLast before trim : " + modalFirstName.value);
+      modalLastName.value=modalFirstName.value.trim();
+      console.log("modalLast before trim : " + modalFirstName.value);
+      console.log(modalFirstName.value + " + " + modalLastName.value);
+      if(modalFirstName.value.length < 2 || modalLastName.value.length < 2){
+        console.log(modalFirstName.value + " + " + modalLastName.value);
+        return false;
+      }else{
+        event.preventDefault(); // stop default event of onsubmit
+        modalForm.style.animation = "formhidden var(--modal-duration) both";
+        setTimeout(() => {
+          modalForm.classList.add('select-hide'); // display=none;
+          document.querySelector(".confirmation-container").style.display = "flex";
+          document.querySelector(".confirmation-container").style.animation = "confirmationanim var(--modal-duration) both";
+          }, modalContentDuration);
+      }
     }
