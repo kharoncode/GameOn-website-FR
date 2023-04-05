@@ -101,9 +101,9 @@ function submitColorValidity(){
 
 // Custom Validity 
   // --FirstName
-    modalFirstName.setAttribute('pattern', "^(?!\\s).+(?<!\\s)$");
+    modalFirstName.setAttribute('pattern', "^[^\\d\\s].*[\\w]*(?<!\\s)$");
   // --LasttName
-    modalLastName.setAttribute('pattern', "^(?!\\s).+(?<!\\s)$");
+    modalLastName.setAttribute('pattern', "^[^\\d\\s].*[\\w]*(?<!\\s)$");
   // --Mail
     modalMail.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");
   // --Birthdate
