@@ -101,9 +101,9 @@ function submitColorValidity(){
 
 // Custom Validity 
   // --FirstName
-    modalFirstName.setAttribute('pattern', "^[^\\d\\s].*[\\w]*(?<!\\s)$");
+    /* modalFirstName.setAttribute('pattern', "^[^\\d].*[\\w]$"); */
   // --LasttName
-    modalLastName.setAttribute('pattern', "^[^\\d\\s].*[\\w]*(?<!\\s)$");
+    /* modalLastName.setAttribute('pattern', "^[^\\d].*[\\w]$"); */
   // --Mail
     modalMail.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");
   // --Birthdate
@@ -120,45 +120,45 @@ function submitColorValidity(){
 // Show ErrorMessage for each formData
   // --for each formData add/remove errorMessage if formData.validity = false/true
     function formDataValidity (key, modal){
-      if(modal.target.validity.valid){
+      if(modal.validity.valid){
         delete formDataObject[key].dataset.errorVisible;
       }else{
         formDataObject[key].dataset.errorVisible = true;
       }
     }
   // --First Name
+    var firstNameValue = modalFirstName.value.trim();
     modalFirstName.addEventListener("keyup", (e)=>{
-      formDataValidity("first", e);
-    }); 
+      formDataValidity("first", e.target);
+      firstNameValue = e.target.value.trim();
+    });
   // --Last Name
+    var lastNameValue = modalLastName.value.trim();
     modalLastName.addEventListener("keyup", (e)=>{
-      formDataValidity("last", e);
+      formDataValidity("last", e.target);
+      lastNameValue = e.target.value.trim();
     });
   // --Email
     modalMail.addEventListener("keyup", (e)=>{
-      formDataValidity("email", e);
+      formDataValidity("email", e.target);
     });
   // --Birthdate
     modalBirthdate.addEventListener("change", (e)=>{
-      formDataValidity("birthdate", e);
+      formDataValidity("birthdate", e.target);
     });
   // --Quantity
     modalQuantity.addEventListener("keyup", (e)=>{
-      formDataValidity("quantity", e);
+      formDataValidity("quantity", e.target);
     });
   // --Location
     const modalInputLocation = modalLocation[0]; // if one input[type:radio].validity=true, the other=true too
-    document.getElementById("location").addEventListener("mouseover", ()=>{
-      if(modalInputLocation.validity.valid){
-        delete formDataObject['location'].dataset.errorVisible;
-      }else{
-        formDataObject['location'].dataset.errorVisible = true;
-      };
+    document.getElementById("location").addEventListener("mouseover", (e)=>{
+      formDataValidity("location", modalInputLocation);
     });
   // --Conditions of Sale (cos)
     var cosValidity = modalCOS.validity.valid;
     modalCOS.addEventListener("change", (e)=>{
-      formDataValidity("cos", e);
+      formDataValidity("cos", e.target);
     });
 
 // Submit modal
@@ -167,13 +167,31 @@ function submitColorValidity(){
       submitColorValidity();
     });
   // -- Onsubmit
-    function validate(event){
-      event.preventDefault(); // stop default event of onsubmit
-      modalForm.style.animation = "formhidden var(--modal-duration) both";
-      setTimeout(() => {
-        modalForm.classList.add('select-hide'); // display=none;
-        document.querySelector(".confirmation-container").style.display = "flex";
-        document.querySelector(".confirmation-container").style.animation = "confirmationanim var(--modal-duration) both";
-        }, modalContentDuration);
-      
+  function validate(event){
+        if(firstNameValue.length <2 || lastNameValue.length <2){
+          modalFirstName.value = firstNameValue;
+          modalLastName.value = lastNameValue;
+          if(firstNameValue.length <2 && lastNameValue.length <2){
+          formDataObject["first"].dataset.errorVisible = true;
+          formDataObject["last"].dataset.errorVisible = true;
+          }
+          else if(firstNameValue.length <2){
+            formDataObject["first"].dataset.errorVisible = true;
+          } else if(lastNameValue.length <2){
+            formDataObject["last"].dataset.errorVisible = true;
+          }
+          modalSubmit.style.background = "#7c4349";
+          modalSubmit.style.cursor= "not-allowed";
+          return false;
+        }
+        else{
+        event.preventDefault(); // stop default event of onsubmit
+        modalForm.style.animation = "formhidden var(--modal-duration) both";
+        setTimeout(() => {
+          modalForm.classList.add('select-hide'); // display=none;
+          document.querySelector(".confirmation-container").style.display = "flex";
+          document.querySelector(".confirmation-container").style.animation = "confirmationanim var(--modal-duration) both";
+          }, modalContentDuration);
+        
+      }
     }
