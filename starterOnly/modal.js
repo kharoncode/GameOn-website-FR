@@ -168,14 +168,13 @@ function submitColorValidity(){
     });
   // -- Onsubmit
   function validate(event){
+        modalFirstName.value = firstNameValue;
+        modalLastName.value = lastNameValue;
         if(firstNameValue.length <2 || lastNameValue.length <2){
-          modalFirstName.value = firstNameValue;
-          modalLastName.value = lastNameValue;
           if(firstNameValue.length <2 && lastNameValue.length <2){
           formDataObject["first"].dataset.errorVisible = true;
           formDataObject["last"].dataset.errorVisible = true;
-          }
-          else if(firstNameValue.length <2){
+          } else if(firstNameValue.length <2){
             formDataObject["first"].dataset.errorVisible = true;
           } else if(lastNameValue.length <2){
             formDataObject["last"].dataset.errorVisible = true;
