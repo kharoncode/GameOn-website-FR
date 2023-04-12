@@ -105,7 +105,7 @@ function submitColorValidity(){
   // --LasttName
     /* modalLastName.setAttribute('pattern', "^[^\\d].*[\\w]$"); */
   // --Mail
-    modalMail.setAttribute('pattern', "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}");
+    modalMail.setAttribute('pattern', "[a-z0-9._+-]+@[a-z0-9.-]+\\.[a-z]{2,}");
   // --Birthdate
     const date = new Date(); // Get current date
     let day = date.getDate(); // Get Day
@@ -153,6 +153,9 @@ function submitColorValidity(){
   // --Location
     const modalInputLocation = modalLocation[0]; // if one input[type:radio].validity=true, the other=true too
     document.getElementById("location").addEventListener("mouseover", (e)=>{
+      formDataValidity("location", modalInputLocation);
+    });
+    document.getElementById("location").addEventListener("click", (e)=>{
       formDataValidity("location", modalInputLocation);
     });
   // --Conditions of Sale (cos)
